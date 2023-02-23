@@ -131,9 +131,188 @@ change test_column0 test_column2 int;
 
 desc test_table;
 
+create table test ( id int auto_increment primary key );
+
+describe test;
+
+insert into test values ();
+
+select * from test;
+
+insert into test value ( 100 );
+
+insert into test value ();
+
+select * from test;
+
+delete from test where id = 101;
+select * from test;
+
+insert into test values ();
+select * from test;
+
+DELETE FROM test;
+SELECT * FROM test;
+
+INSERT INTO test VALUES ();
+SELECT * FROM test;
+
+SHOW TABLE STATUS 
+WHERE name = 'test';
+
+ALTER TABLE test AUTO_INCREMENT = 1;
+
+INSERT INTO test VALUES ();
+SET @count=0;
+UPDATE test SET id=@count:=@count+1;
+SELECT * FROM test;
+
+# 테이블에 데이터 추가, insert
+create table table1 (
+column1 varchar(100),
+column2 varchar(100),
+column3 varchar(100)
+);
+desc table1;
+
+insert into table1 (column1, column2, column3) values ('a','aa','aaa');
+# 실행한 횟수만큼 아래 조건으로 조회해보면 추가된 것을 볼 수 있다.
+SELECT * FROM table1;
+
+INSERT INTO table1 VALUES ( 'a', 'aa', 'aaa' );
+
+SELECT * FROM table1;
+
+INSERT INTO table1 ( column1, column2 ) VALUES ( 'b', 'bb' );
+
+SELECT * FROM table1;
+
+UPDATE table1 SET column1 = 'z';
+
+SELECT * FROM table1;
+
+UPDATE table1 SET column1 = 'x' WHERE column2 = 'aa';
+
+SELECT * FROM table1;
+
+update table1
+SET column1 = 'y'
+, column2 = 'yy'
+WHERE column3 = 'aaa';
+
+SELECT * FROM table1;
+
+DELETE FROM table1 WHERE column1 = 'y';
+
+SELECT * FROM table1;
+
+DELETE FROM table1;
+
+SELECT * FROM table1;
+
+#테스트용 테이블 생성
+create table if not exists day_visitor_realtime (
+ipaddress varchar(16),
+iptime_first datetime,
+before_url varchar(250),
+device_info varchar(40),
+os_info varchar(40),
+session_id varchar(80));
+
+insert into day_visitor_realtime (
+	ipaddress, iptime_first, before_url, device_info
+)
+values('192.168.0.1', '2023-02-23 11:34:45', 'localhost', 'PC')
+    , ('192.168.0.2', '2023-02-23 11:34:51', 'localhost', 'iPhone'
+);
+select*from day_visitor_realtime;
+
+INSERT INTO `day_visitor_realtime` (`session_id`) VALUES
+('12345.567890');
+INSERT INTO `day_visitor_realtime` (`session_id`) VALUES
+('1234.567890');
+INSERT INTO `day_visitor_realtime` (`session_id`) VALUES ('123');
+INSERT INTO `day_visitor_realtime` (`session_id`) VALUES ('1234');
+INSERT INTO `day_visitor_realtime` (`session_id`) VALUES ('12345');
+SELECT * FROM day_visitor_realtime;
+
+# not null
+DROP TABLE IF EXISTS day_visitor_realtime;
+create table if not exists day_visitor_realtime (
+ipaddress varchar(16) NOT NULL,
+iptime_first datetime,
+before_url varchar(250),
+device_info varchar(40),
+os_info varchar(40),
+session_id varchar(80));
+
+SELECT * FROM day_visitor_realtime;
+
+# PRIMARY KEY
+# 기본키는 하나의 테이블에 있는 데이터들을 고유하게 식별하는 제약조건입니다.
+# 기본키는 한 개의 테이블에 하나만 생성가능합니다.
+# 기본키로 설정된 열에 중복된 값을 가질 수 없으며 NULL값 또한 가질 수 없습니다.
+# 형식은 PRIMARY KEY (컴럼명1, 컬럼명2, 컬럼명3, ...)와 같이 작성할 수 있습니다.alter
+
+DROP TABLE IF EXISTS day_visitor_realtime;
+CREATE TABLE day_visitor_realtime (
+  id INT,    
+  ipaddress varchar(16),
+  iptime_first datetime,
+  before_url varchar(250),
+  device_info varchar(40),
+  os_info varchar(40),
+  session_id varchar(80),
+  PRIMARY KEY(id)
+);
+
+# FOREIGN KEY(외래키)
+# 는 참조하는 테이블의 컬럼에 존재하는 값만 사용하는 제약조건이다.
+# 참조할 수 있는 칼럼은 참조하는 테이블의 기본키이거나 UNIQUE한 컬럼만 가능하다.
+
+#참조할 테이블
+create table orders (
+order_id int,
+customer_id int,
+order_date datetime,
+primary key(order_id)
+);
+
+CREATE TABLE order_detail (
+  order_id INT,
+  product_id INT,
+  product_name VARCHAR(200),
+  order_date DATETIME,
+  CONSTRAINT FK_ORDERS_ORDERID FOREIGN KEY (order_id) REFERENCES orders(order_id),
+  PRIMARY KEY(order_id, product_id)
+);
+
+insert into orders values(1, 1, now());
+insert into orders values(2, 1, now());
+insert into orders values(3, 1, now());
+select * from orders;
+
+#select문.......많이 사용함
+
+CREATE TABLE `users` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `email` varchar(255) COLLATE utf8_bin NOT NULL,
+    `password` varchar(255) COLLATE utf8_bin NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+AUTO_INCREMENT=1 ;
+
+use python;
 
 
+CREATE TABLE `users` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `email` varchar(255) COLLATE utf8_bin NOT NULL,
+    `password` varchar(255) COLLATE utf8_bin NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+AUTO_INCREMENT=1 ;
 
-
+select * from users;
 
 
